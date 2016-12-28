@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<keyWord>
+	<cateGory>
+		<fruit name="水果">
+			<pome name="仁果类">
+				<value id="1">苹果</value>
+				<value id="2">梨</value>
+				<value id="3">海棠</value>
+				<value id="4">山楂</value>
+			</pome>
+			<drupe name="核果类">
+				<value id="5">桃</value>
+				<value id="6">李</value>
+				<value id="7">杏</value>
+				<value id="8">杨梅</value>
+				<value id="9">樱桃</value>
+			</drupe>
+			<berry name="浆果类">
+				<value id="10">葡萄</value>
+				<value id="11">提子</value>
+				<value id="12">草莓</value>
+				<value id="13">猕猴桃</value>
+				<value id="14">石榴</value>
+			</berry>
+			<citrus name="柑橘类">
+				<value id="15">橙</value>
+				<value id="16">桔</value>
+				<value id="17">柑</value>
+				<value id="18">柚</value>
+				<value id="19">柠檬</value>
+			</citrus>
+			<tropicalFruit name="热带水果类">
+				<value id="20">香蕉</value>
+				<value id="21">菠萝</value>
+				<value id="22">龙眼</value>
+				<value id="23">荔枝</value>
+				<value id="24">橄榄</value>
+				<value id="25">琵琶</value>
+				<value id="26">椰子</value>
+				<value id="27">芒果</value>
+				<value id="28">杨桃</value>
+				<value id="29">木瓜</value>
+				<value id="30">火龙果</value>
+				<value id="31">潘石榴</value>
+				<value id="32">榴莲</value>
+			</tropicalFruit>	
+			<mixFruit name="什果类">
+				<value id="33">枣</value>
+				<value id="34">柿子</value>
+				<value id="35">无花果</value>			
+			</mixFruit>
+			<melon name="瓜果类">
+				<value id="36">西瓜</value>
+				<value id="37">甜瓜</value>
+				<value id="38">哈密瓜</value>
+				<value id="39">香瓜</value>
+			</melon>
+		</fruit>
+		<vegetable name="蔬菜">
+			<cabbage name="白菜类">
+				<value id="1">大白菜</value>	
+				<value id="2">油菜</value>
+				<value id="3">小青菜</value>
+				<value id="4">菜薹</value>
+			</cabbage>
+			<coles name="甘蓝类">
+				<value id="5">菜花</value>
+				<value id="6">芥蓝</value>
+				<value id="7">西兰花</value>
+				<value id="8">结球甘蓝</value>
+			</coles>
+			<earthVegetable name="根菜类">
+				<value id="9">萝卜</value>
+				<value id="10">胡萝卜</value>
+				<value id="11">芜菁</value>
+			</earthVegetable>
+			<veggies name="绿叶菜类">
+				<value id="12">芹菜</value>
+				<value id="13">菠菜</value>
+				<value id="14">莴笋</value>
+				<value id="15">生菜</value>
+				<value id="16">空心菜</value>
+				<value id="17">香菜</value>
+				<value id="18">茼蒿</value>
+				<value id="19">茴香</value>
+				<value id="20">苋菜</value>
+				<value id="21">木耳菜</value>	
+			</veggies>
+			<allium name="葱蒜类">
+				<value id="22">洋葱</value>
+				<value id="23">大蒜</value>
+				<value id="24">香葱</value>
+				<value id="25">大蒜</value>
+				<value id="26">蒜苗</value>
+				<value id="27">蒜薹</value>
+				<value id="28">韭菜</value>
+			</allium>
+			<solanaceous name="茄果类">
+				<value id="29">茄子</value>
+				<value id="30">青椒</value>
+				<value id="31">辣椒</value>
+				<value id="32">西红柿</value>
+			</solanaceous>
+			<beans name="豆类">
+				<value id="33">扁豆</value>
+				<value id="34">荚豆</value>
+				<value id="35">豇豆</value>	
+				<value id="36">豌豆</value>
+				<value id="37">四季豆</value>
+				<value id="38">毛豆</value>
+				<value id="39">蚕豆</value>
+				<value id="40">豆芽</value>
+				<value id="41">豌豆苗</value>
+			</beans>
+			<cucurbites name="瓜类">
+				<value id="42">黄瓜</value>
+				<value id="43">丝瓜</value>
+				<value id="44">冬瓜</value>
+				<value id="45">西葫芦</value>
+				<value id="46">苦瓜</value>
+				<value id="47">南瓜</value>
+				<value id="48">舌瓜</value>
+				<value id="49">佛手瓜</value>
+				<value id="50">蛇瓜</value>
+			</cucurbites>
+			<aquaticVegetables name="水生蔬菜">
+				<value id="51">莲藕</value>
+				<value id="52">荸荠</value>
+				<value id="53">水芹</value>
+				<value id="54">茭白</value>
+			</aquaticVegetables>
+			<mushroom name="新鲜食用菌">
+				<value id="55">平菇</value>
+				<value id="56">香菇</value>
+				<value id="57">金针菇</value>
+				<value id="58">滑菇</value>
+				<value id="59">蘑菇</value>
+				<value id="60">木耳</value>
+			</mushroom>
+			<mixedVegetables name="多年生和杂类蔬菜">
+				<value id="60">竹笋</value>
+				<value id="60">芦笋</value>
+				<value id="60">黄花菜</value>
+			</mixedVegetables>
+		</vegetable>
+		<aquaticProduct name="水产品">
+			<fish name="鱼类">
+				<value id="1">乌鱼</value>	
+			</fish>
+			<shrimp name="虾类">
+				<value id="2">草虾</value>
+			</shrimp>
+			<shellfish name="贝类">
+				<value id="3">牡蛎</value>
+			</shellfish>
+			<crab name="蟹类">
+				<value id="4">大闸蟹 </value>
+			</crab>
+			<other name="其他水产品">
+				<value id="5">海带 </value>
+				<value id="6">紫菜</value>
+				<value id="7">海蜇 </value>
+			</other>
+		</aquaticProduct>
+		<poultryMeat name="家禽肉类">
+		
+		</poultryMeat>
+		<milkEgg name="奶蛋类">
+		
+		</milkEgg>
+	</cateGory>
+</keyWord>
