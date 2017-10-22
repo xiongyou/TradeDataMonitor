@@ -16,31 +16,31 @@ public class ProductURLManager
 {
 	BaseDAO dao=new BaseDAO();
 
-	/**判断数据库中是否存在该productURL
+	/**?ж??????????????productURL
 	 * @param productURL
 	 * @return true or false
 	 */
 	public boolean isExist(ProductURL productURL)
 	{		
-		if(dao.find(ProductURL.class,productURL.getProductURL())==null)   //如果数据库中不存在该产品
+		if(dao.find(ProductURL.class,productURL.getProductURL())==null)   //????????в?????ò??
 		{
 			return false;
 		}
-		else    //如果数据库中存在该产品
+		else    //????????д???ò??
 		{
 			return true;
 		}
 	}
 	
 
-	/**插入产品链接信息
-	 * @param productURL 产品对象
+	/**?????????????
+	 * @param productURL ???????
 	 */
 	public void insertProductURL(ProductURL productURL)
 	{
-		if(isExist(productURL))   //如果数据库中存在该产品
+		if(isExist(productURL))   //????????д???ò??
 		{
-			//更新关键字
+			//????????
 			updateProductURL(productURL);
 
 		}
@@ -52,17 +52,17 @@ public class ProductURLManager
 
 	}
 
-	/**更新商品链接的关键字，解决多个关键字查找到到同一个商品的问题
+	/**???????????????????????????????????????????????
 	 * @param productURL
 	 */
 	public void updateProductURL(ProductURL productURL)
 	{
 		ProductURL oldProductURL=dao.find(ProductURL.class,productURL.getProductURL());
-		if(oldProductURL.getKeyWord().contains(";"+productURL.getKeyWord()+";"))   //如果该关键词已存在
+		if(oldProductURL.getKeyWord().contains(";"+productURL.getKeyWord()+";"))   //???ù????????
 		{
 			return;
 		}
-		else    //如果不存在该关键词更新keyWord字段
+		else    //??????ù??????keyWord???
 		{
 
 			oldProductURL.setKeyWord(oldProductURL.getKeyWord()+productURL.getKeyWord()+";");
@@ -70,28 +70,28 @@ public class ProductURLManager
 		}
 	}
 	
-	/**根据不同平台不同关键字将商品总数写入文件
+	/**???????????????????????д?????
 	 * @param productURL
 	 */
 	public void saveProductURLCounttoTxt(String productURLCount) throws IOException
 	{
 		File file = new File("output\\productURLCount.txt");
 		FileOutputStream fos = new FileOutputStream(file,true);
-        OutputStreamWriter osw = new OutputStreamWriter(fos);
+        OutputStreamWriter osw = new OutputStreamWriter(fos,"UTF-8");
         BufferedWriter bw = new BufferedWriter(osw);
 		bw.write(productURLCount+"\r\n");
 		bw.flush();
 	}
 	
 	/**
-	 * 将采集的产品url、对应的平台、对应的关键字写入文件
+	 * ?????????url????????????????????д?????
 	 * @throws IOException 
 	 */
 	public void saveProductURLtoTxt(String productURL,String platform,String keyword) throws IOException
 	{
 		File file=new File("output\\productURL.txt");
 		FileOutputStream fos=new FileOutputStream(file,true);
-		OutputStreamWriter osw =new OutputStreamWriter(fos);
+		OutputStreamWriter osw =new OutputStreamWriter(fos,"UTF-8");
 		BufferedWriter bw=new BufferedWriter(osw);
 		bw.write(productURL+"\t"+platform+"\t"+keyword+"\r\n");
 		bw.flush();

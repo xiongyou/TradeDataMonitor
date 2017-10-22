@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-/** @pdOid ¸ù¾İURL»ñÈ¡²úÆ·ĞÅÏ¢*/
+/** @pdOid ï¿½ï¿½ï¿½URLï¿½ï¿½È¡ï¿½ï¿½Æ·ï¿½ï¿½Ï¢*/
 public class GetContentByURL 
 {
 	DataExtractUtility deUtility=null; 
@@ -20,9 +20,9 @@ public class GetContentByURL
 		this.deUtility=new DataExtractUtility(websiteName);
 	}
 	
-	/**»ñÈ¡ÍøÒ³ÄÚÈİby URL 
-	 * @param urlString ÍøÖ·
-	 * @return ÍøÒ³ÄÚÈİ
+	/**ï¿½ï¿½È¡ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½by URL 
+	 * @param urlString ï¿½ï¿½Ö·
+	 * @return ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½
 	 * @throws IOException
 	 */
 	public String getOneHtml(final String urlString,String charset) throws IOException
@@ -34,9 +34,12 @@ public class GetContentByURL
 		{
 			url = new URL(urlString);
 			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-			urlConnection.setRequestProperty("User-Agent", "Mozilla/31.0 (compatible; MSIE 10.0; Windows NT; DigExt)");
+			urlConnection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.221 Safari/537.36 SE 2.X MetaSr 1.0");//"Mozilla/31.0 (compatible; MSIE 10.0; Windows NT; DigExt)");
+			urlConnection.setDoOutput(true);
+			urlConnection.setConnectTimeout(10000);
+			urlConnection.connect();
+			final BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(),charset));// ï¿½ï¿½È¡ï¿½ï¿½Ò³È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			
-			final BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), charset));// ¶ÁÈ¡ÍøÒ³È«²¿ÄÚÈİ
 			while ((temp = in.readLine()) != null)
 			{
 				sb.append(temp);
@@ -45,7 +48,7 @@ public class GetContentByURL
 		}
 		catch (final MalformedURLException me)
 		{
-			System.out.println("ÄãÊäÈëµÄURL¸ñÊ½ÓĞÎÊÌâ£¡Çë×ĞÏ¸ÊäÈë");
+			System.out.println("æ‰“å¼€URLå¤±è´¥");
 			me.getMessage();
 			throw me;
 		}
@@ -54,14 +57,14 @@ public class GetContentByURL
 			e.printStackTrace();
 			throw e;
 		}
-		//System.out.println(sb.toString()); //´òÓ¡ÍøÒ³ÄÚÈİ
+		//System.out.println(sb.toString()); //ï¿½ï¿½Ó¡ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½
 		return sb.toString();
 	}
 
 	
-	/**»ñÈ¡ËùÓĞ²úÆ·ËÑË÷Ò³ÃæµÄURL
-	 * @param urlString ËÑË÷Ò³ÃæÍøÖ·
-	 * @return ²úÆ·ËùÓĞËÑË÷½á¹ûÒ³ÃæURLÁĞ±í
+	/**ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ğ²ï¿½Æ·ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½ï¿½URL
+	 * @param urlString ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½Ö·
+	 * @return ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½URLï¿½Ğ±ï¿½
 	 * @throws Exception 
 	 */
 	public List<String> getSearchPagesURL(String urlString,String keyword,String charset) throws Exception
@@ -79,17 +82,17 @@ public class GetContentByURL
 		
 		if(this.deUtility.notFoundDetermine(html))
 		{
-			int page_max=this.deUtility.extractTotalPageNo(html);  //»ñÈ¡Ò³Êı
+			int page_max=this.deUtility.extractTotalPageNo(html);  //ï¿½ï¿½È¡Ò³ï¿½ï¿½
 			
-			list=this.deUtility.getAllSearchResPages(page_max,keyword);   //´æ´¢Ò³ÃæURL	
+			list=this.deUtility.getAllSearchResPages(page_max,keyword);   //ï¿½æ´¢Ò³ï¿½ï¿½URL	
 		}
 		return list;
 	}
 
 
-	/**¸ù¾İÒ³ÃæµÄURL»ñÈ¡ËùÓĞ²úÆ·µÄURL
-	 * @param urlString ·ÖÒ³ÍøÖ·
-	 * @return ²úÆ·URLÁĞ±í
+	/**ï¿½ï¿½ï¿½Ò³ï¿½ï¿½ï¿½URLï¿½ï¿½È¡ï¿½ï¿½ï¿½Ğ²ï¿½Æ·ï¿½ï¿½URL
+	 * @param urlString ï¿½ï¿½Ò³ï¿½ï¿½Ö·
+	 * @return ï¿½ï¿½Æ·URLï¿½Ğ±ï¿½
 	 * @throws Exception 
 	 */
 	public List<String> getAllProductURL(String urlString,String charset) throws Exception  
@@ -103,9 +106,9 @@ public class GetContentByURL
 		{
 			e.getMessage();
 		}
-		System.out.println("------------------------»»Ò³ÁË£¡------------------------------");
+		System.out.println("------------------------æ¢é¡µäº†------------------------------");
 
-		List<String> list=this.deUtility.extractProductURL(html);   //´æ´¢Ò³ÃæURL
+		List<String> list=this.deUtility.extractProductURL(html);   //ï¿½æ´¢Ò³ï¿½ï¿½URL
 		
 		return list;
 

@@ -18,7 +18,7 @@ public class MarketCollection
 	DataSourceConfig_read readXML=new DataSourceConfig_read("src\\dataConfig.xml");
 
 	/**
-	 * ¹¹Ôìº¯Êı£¨´«ÈëµçÉÌÆ½Ì¨Ãû£©
+	 * ï¿½ï¿½ï¿½ìº¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ½Ì¨ï¿½ï¿½
 	 * @param websiteName
 	 */
 	public MarketCollection(String websiteName)
@@ -34,7 +34,7 @@ public class MarketCollection
 	}
 
 	/**
-	 * É¨Ãè²¢´æ´¢Ö¸¶¨ÍøÕ¾ÖĞÖ¸¶¨¹Ø¼ü´ÊµÄÉÌÆ·Á´½ÓĞÅÏ¢
+	 * É¨ï¿½è²¢ï¿½æ´¢Ö¸ï¿½ï¿½ï¿½ï¿½Õ¾ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½Ø¼ï¿½Êµï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 	 * @throws Exception 
 	 */
 	public void scanAllProduct() throws Exception  
@@ -49,7 +49,7 @@ public class MarketCollection
 
 	/** @pdOid e11e80bb-d5d0-450d-a996-86682c711781 */
 	/**
-	 * É¨Ãè²¢´æ´¢Ö¸¶¨ÍøÕ¾ÖĞÄ³¸ö¹Ø¼ü´ÊµÄÉÌÆ·Á´½ÓĞÅÏ¢
+	 * É¨ï¿½è²¢ï¿½æ´¢Ö¸ï¿½ï¿½ï¿½ï¿½Õ¾ï¿½ï¿½Ä³ï¿½ï¿½ï¿½Ø¼ï¿½Êµï¿½ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 	 * @param keyword
 	 * @throws Exception 
 	 */
@@ -58,41 +58,41 @@ public class MarketCollection
 		int sum=0;
 		maximum=Integer.parseInt(readXML.getMaximum());
 		
-		String queryString=readXML.getSearchURL(this.website,keyword);  //´æ´¢²éÑ¯URL
+		String queryString=readXML.getSearchURL(this.website,keyword);  //ï¿½æ´¢ï¿½ï¿½Ñ¯URL
 		String charset=readXML.getCharset(this.website);
 
 		GetContentByURL getProductContent=new GetContentByURL(this.website);
 
-		List<String> pageList = new ArrayList<String>();   //´æ·ÅËùÓĞÒ³ÃæµÄURL	
+		List<String> pageList = new ArrayList<String>();   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½ï¿½URL	
 		
 		pageList=getProductContent.getSearchPagesURL(queryString,keyword,charset);
 
-		//¸ù¾İÒ³ÊıÑ­»·£¬»ñÈ¡ËùÓĞÒ³ÖĞµÄproductURL
+		//ï¿½ï¿½ï¿½Ò³ï¿½ï¿½Ñ­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ò³ï¿½Ğµï¿½productURL
 		if(pageList.size()!=0)
 		{
 			for(int page=0;page<pageList.size()&&sum<=maximum;page++)
 			{
-				List<String> onePageProductURL=new ArrayList<String>();   //´æ·ÅÒ»¸öÒ³ÃæÀïËùÓĞ²úÆ·µÄURL
+				List<String> onePageProductURL=new ArrayList<String>();   //ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ²ï¿½Æ·ï¿½ï¿½URL
 				
-				//getOnePageAllURL  »ñÈ¡Ò»¸öËÑË÷Ò³µÄËùÓĞ²úÆ·URL,²¢±£´æ²úÆ·URL
+				//getOnePageAllURL  ï¿½ï¿½È¡Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½Ğ²ï¿½Æ·URL,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·URL
 				onePageProductURL=getProductContent.getAllProductURL(pageList.get(page),charset);
 				
 				for(String url:onePageProductURL)
 				{
-					//productURLManage.insertProductURL(this.setProductURL(url,keyword));    //½«ĞÅÏ¢Ğ´ÈëÊı¾İ¿â
+					//productURLManage.insertProductURL(this.setProductURL(url,keyword));    //æ’å…¥åˆ°æ•°æ®åº“ï¿½ï¿½ï¿½ï¿½Ï¢Ğ´ï¿½ï¿½ï¿½ï¿½İ¿ï¿½
 					sum++;
 					
-					//productURLManage.saveProductURLtoTxt(url, this.website, keyword);   //½«²úÆ·url¡¢¶ÔÓ¦µÄÆ½Ì¨¡¢¶ÔÓ¦µÄ¹Ø¼ü×ÖĞ´ÈëÎÄ¼ş
-					System.out.println(url+"\t"+this.website+"\t"+keyword);    //½«²úÆ·url´òÓ¡³öÀ´
+					productURLManage.saveProductURLtoTxt(url, this.website, keyword);   //ä¿å­˜åˆ°urlæ–‡ä»¶ï¿½ï¿½ï¿½ï¿½Æ·urlï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½Æ½Ì¨ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½Ä¹Ø¼ï¿½ï¿½ï¿½Ğ´ï¿½ï¿½ï¿½Ä¼ï¿½
+					System.out.println(url+"\t"+this.website+"\t"+keyword);    //ï¿½ï¿½ï¿½ï¿½Æ·urlï¿½ï¿½Ó¡ï¿½ï¿½ï¿½ï¿½
 				}	
-				productURLManage.saveProductURLCounttoTxt(this.website+":"+keyword+":¹²"+sum+"¸öÉÌÆ·");  //½«¹Ø¼ü×ÖÏúÊÛÍ³¼ÆĞ´ÈëÎÄ±¾ÎÄ¼ş
-				System.out.println(this.website+":"+keyword+":¹²"+sum+"¸öÉÌÆ·");
+				productURLManage.saveProductURLCounttoTxt(this.website+":"+keyword+":å…±é‡‡é›†åˆ°"+sum+"å•†å“");  //ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í³ï¿½ï¿½Ğ´ï¿½ï¿½ï¿½Ä±ï¿½ï¿½Ä¼ï¿½
+				System.out.println(this.website+":"+keyword+":å…±é‡‡é›†åˆ°"+sum+"å•†å“");
 			}
 		}
 		else
 		{
-			productURLManage.saveProductURLCounttoTxt(this.website+":"+keyword+":¹²"+sum+"¸öÉÌÆ·");  //½«¹Ø¼ü×ÖÏúÊÛÍ³¼ÆĞ´ÈëÎÄ±¾ÎÄ¼ş
-			System.out.println(this.website+":"+keyword+":¹²"+sum+"¸öÉÌÆ·");	
+			productURLManage.saveProductURLCounttoTxt(this.website+":"+keyword+":å…±é‡‡é›†åˆ°"+sum+"å•†å“");  //ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í³ï¿½ï¿½Ğ´ï¿½ï¿½ï¿½Ä±ï¿½ï¿½Ä¼ï¿½
+			System.out.println(this.website+":"+keyword+":å…±é‡‡é›†åˆ°"+sum+"å•†å“");	
 		}
 	}
 	
