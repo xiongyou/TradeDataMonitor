@@ -1,0 +1,99 @@
+package com.tradedatamonitor.datacollect;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.util.Date;
+
+import com.tradedatamonitor.dao.BaseDAO;
+import com.tradedatamonitor.pojo.ProductURL;
+
+public class ProductURLManager 
+{
+	BaseDAO dao=new BaseDAO();
+
+	/**�ж���ݿ����Ƿ���ڸ�productURL
+	 * @param productURL
+	 * @return true or false
+	 */
+	public boolean isExist(ProductURL productURL)
+	{		
+		if(dao.find(ProductURL.class,productURL.getProductURL())==null)   //�����ݿ��в����ڸò�Ʒ
+		{
+			return false;
+		}
+		else    //�����ݿ��д��ڸò�Ʒ
+		{
+			return true;
+		}
+	}
+	
+
+	/**�����Ʒ������Ϣ
+	 * @param productURL ��Ʒ����
+	 */
+	public void insertProductURL(ProductURL productURL)
+	{
+		if(isExist(productURL))   //�����ݿ��д��ڸò�Ʒ
+		{
+			//���¹ؼ���
+			updateProductURL(productURL);
+
+		}
+		else
+		{
+			productURL.setKeyWord(";"+productURL.getKeyWord()+";");
+			dao.create(productURL);
+		}
+
+	}
+
+	/**������Ʒ���ӵĹؼ��֣��������ؼ��ֲ��ҵ���ͬһ����Ʒ������
+	 * @param productURL
+	 */
+	public void updateProductURL(ProductURL productURL)
+	{
+		ProductURL oldProductURL=dao.find(ProductURL.class,productURL.getProductURL());
+		if(oldProductURL.getKeyWord().contains(";"+productURL.getKeyWord()+";"))   //���ùؼ���Ѵ���
+		{
+			return;
+		}
+		else    //�����ڸùؼ�ʸ���keyWord�ֶ�
+		{
+
+			oldProductURL.setKeyWord(oldProductURL.getKeyWord()+productURL.getKeyWord()+";");
+			dao.update(oldProductURL);
+		}
+	}
+	
+	/**��ݲ�ͬƽ̨��ͬ�ؼ��ֽ���Ʒ����д���ļ�
+	 * @param productURL
+	 */
+	public void saveProductURLCounttoTxt(String productURLCount) throws IOException
+	{
+		File file = new File("output\\productURLCount.txt");
+		FileOutputStream fos = new FileOutputStream(file,true);
+        OutputStreamWriter osw = new OutputStreamWriter(fos,"UTF-8");
+        BufferedWriter bw = new BufferedWriter(osw);
+		bw.write(productURLCount+"\r\n");
+		bw.flush();
+	}
+	
+	/**
+	 * ���ɼ��Ĳ�Ʒurl����Ӧ��ƽ̨����Ӧ�Ĺؼ���д���ļ�
+	 * @throws IOException 
+	 */
+	public void saveProductURLtoTxt(String productURL,String platform,String keyword) throws IOException
+	{
+		File file=new File("output\\productURL.txt");
+		FileOutputStream fos=new FileOutputStream(file,true);
+		OutputStreamWriter osw =new OutputStreamWriter(fos,"UTF-8");
+		BufferedWriter bw=new BufferedWriter(osw);
+		bw.write(productURL+"\t"+platform+"\t"+keyword+"\r\n");
+		bw.flush();
+	}
+}
