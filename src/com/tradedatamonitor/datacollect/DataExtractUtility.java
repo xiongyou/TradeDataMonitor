@@ -15,7 +15,7 @@ public class DataExtractUtility
 	private int pageTimes;
 	private String prefix;
 	
-	DataSourceConfig_read readXML=new DataSourceConfig_read("src\\dataConfig.xml");
+	DataSourceConfig_read readXML=new DataSourceConfig_read("dataConfig.xml");
 	
 	public DataExtractUtility(String websiteName)   
 	{
@@ -23,7 +23,7 @@ public class DataExtractUtility
 	}
 
 	/**
-	 * ¸ù¾Ý¹Ø¼ü×Ö¹¹Ôì²éÑ¯URL
+	 * ï¿½ï¿½Ý¹Ø¼ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½Ñ¯URL
 	 * @param keyword
 	 * @return
 	 * @throws Exception
@@ -34,16 +34,16 @@ public class DataExtractUtility
 
 	}
 	
-	/**¹Ø¼ü´ÊËÑË÷½á¹ûÅÐ¶¨
-	 * @param urlString ËÑË÷Ò³ÃæÍøÖ·
-	 * @return ²úÆ·ËùÓÐËÑË÷½á¹ûÒ³ÃæURLÁÐ±í
+	/**ï¿½Ø¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½
+	 * @param urlString ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½Ö·
+	 * @return ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½URLï¿½Ð±ï¿½
 	 * @throws Exception 
 	 */
 	public boolean notFoundDetermine(String searchPageContent) throws Exception
 	{
 		String regex=null;
 		
-		regex=readXML.getNotFoundRegx(this.website);  //»ñÈ¡Ã»ÓÐËÑË÷½á¹ûµÄ±ê¼ÇµÄÕýÔò±í´ïÊ½
+		regex=readXML.getNotFoundRegx(this.website);  //ï¿½ï¿½È¡Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½Çµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½
 		
 		Pattern pa=Pattern.compile(regex,Pattern.DOTALL);
 		Matcher ma=pa.matcher(searchPageContent);
@@ -59,7 +59,7 @@ public class DataExtractUtility
 	}
 	
 	/**
-	 * »ñÈ¡ËÑË÷µÄ×ÜÒ³Êý
+	 * ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½
 	 * @param searchPageContent
 	 * @return
 	 * @throws Exception
@@ -70,7 +70,7 @@ public class DataExtractUtility
 		String page ="1";
 
 
-		regex=readXML.getExtractTotalPageRegx(this.website);  //»ñÈ¡·ÖÒ³ÊýÕýÔò±í´ïÊ½
+		regex=readXML.getExtractTotalPageRegx(this.website);  //ï¿½ï¿½È¡ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½
 
 		Pattern pa=Pattern.compile(regex,Pattern.DOTALL);
 		Matcher ma=pa.matcher(searchPageContent);
@@ -93,7 +93,7 @@ public class DataExtractUtility
 	}
 
 	/**
-	 * ¹¹ÔìËÑË÷Ò³ÃæURL
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½URL
 	 * @param totalPageNo
 	 * @param keyword
 	 * @return
@@ -126,14 +126,14 @@ public class DataExtractUtility
 		for(int j=0;j<totalPageNo;j++)
 		{
 			String pageURL=readXML.getExtractPageURL(this.website, keyword,page_int[j].toString());
-			list.add(pageURL);     //¸÷Ò³ÃæURL¹¹Ôì
+			list.add(pageURL);     //ï¿½ï¿½Ò³ï¿½ï¿½URLï¿½ï¿½ï¿½ï¿½
 		}
 
 		return list;
 	}
 
 	/**
-	 * ¹¹ÔìËÑË÷²úÆ·URL
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·URL
 	 * @param pageContent
 	 * @return
 	 * @throws Exception
@@ -143,8 +143,8 @@ public class DataExtractUtility
 		String regex=null;
 		final List<String> list = new ArrayList<String>();
 
-		regex =readXML.getExtractProductRegx(this.website);   //»ñÈ¡¸÷¸ö²úÆ·URLÕýÔò±í´ïÊ½
-		prefix=readXML.getPrefix(this.website);    //»ñÈ¡²úÆ·urlµÄÇ°×º
+		regex =readXML.getExtractProductRegx(this.website);   //ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·URLï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½
+		prefix=readXML.getPrefix(this.website);    //ï¿½ï¿½È¡ï¿½ï¿½Æ·urlï¿½ï¿½Ç°×º
 		
 		Pattern pa = Pattern.compile(regex, Pattern.DOTALL);
 		Matcher ma = pa.matcher(pageContent);

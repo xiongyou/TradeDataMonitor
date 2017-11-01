@@ -15,7 +15,7 @@ public class MarketCollection
 	private int maximum=0;
 	
 	ProductURLManager productURLManage=new ProductURLManager();
-	DataSourceConfig_read readXML=new DataSourceConfig_read("src\\dataConfig.xml");
+	DataSourceConfig_read readXML=new DataSourceConfig_read("dataConfig.xml");
 
 	/**
 	 * ���캯�������ƽ̨��

@@ -12,7 +12,7 @@
 			<startPage>0</startPage>
 			<pageTimes>1</pageTimes>
 			<!-- 如果获取的产品url原本就为完整的，则此项为null -->
-			<prefix>null</prefix>
+			<prefix>http:</prefix>
 		</SuNing>
 		<!-- 京东 -->
 		<JingDong>
