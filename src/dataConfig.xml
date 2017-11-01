@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<searchConfig>
+	<website>
+		<!-- 苏宁易购 -->
+		<SuNing>
+			<charset>utf-8</charset>
+			<searchURL>http://search.suning.com/[keyword]/</searchURL>
+			<totalPage targetgroup="1">(?&lt;=&lt;/i&gt;/)([\d]*)(?=&lt;/em&gt;)</totalPage>
+			<nextPageURL>http://search.suning.com/[keyword]/&amp;iy=0&amp;cp=[PageNum]</nextPageURL>
+			<productURL>(?&lt;=sellPoint" title=[^&gt;]{1,100}  href=&quot;)([^&gt;]*)(?=" name)</productURL>
+			<notFound>(?=no-result-tips)([^"]*)</notFound>
+			<startPage>0</startPage>
+			<pageTimes>1</pageTimes>
+			<!-- 如果获取的产品url原本就为完整的，则此项为null -->
+			<prefix>null</prefix>
+		</SuNing>
+		<!-- 京东 -->
+		<JingDong>
+			<charset>utf-8</charset>
+			<searchURL>http://search.jd.com/Search?keyword=[keyword]&amp;psort=3</searchURL> 
+			<totalPage targetgroup="1">(?&lt;=&lt;span class="fp-text"&gt;[^\d]{1,50}\d[^\d]{1,30})(\d*)(?=&lt;/i&gt;)</totalPage>
+			<nextPageURL>http://search.jd.com/Search?keyword=[keyword]&amp;psort=3&amp;page=[PageNum]</nextPageURL>
+			<productURL>(?&lt;=&lt;div class="p-name p-name-type-2"&gt;[^&lt;]{1,10}&lt;a target[^&gt;]{1,100}href=")([^&gt;]*)(?=" onclick)</productURL>
+			<notFound>null</notFound>
+			<startPage>1</startPage>
+			<pageTimes>1</pageTimes>
+			<prefix>http:</prefix>
+		</JingDong>
+		<!-- 淘宝 -->
+		<TaoBao>
+			<charset>utf-8</charset>
+			<searchURL>https://s.taobao.com/search?q=[keyword]&amp;sort=sale-desc</searchURL>
+			<totalPage targetgroup="1">(?&lt;="pager"[^"]{1,5}"status"[^\d]{5,40}[\d]{1,10},"totalPage":)(\d*)(?=,"currentPage")</totalPage>
+			<!-- （翻页特殊）[PageNum]=（总页数-1）*44 -->
+			<nextPageURL>https://s.taobao.com/search?q=[keyword]&amp;sort=sale-desc&amp;s=[PageNum]</nextPageURL>
+			<!-- 淘宝获取的是产品id ,需要构造 -->
+			<productURL>(?&lt;=detail_url":"//item\.taobao[^\d]{3,80}003d)(\d{5,20})(?=\\u)</productURL>
+			<notFound>(?="trace":"noresultrec_tip")([^}]*)</notFound>
+			<startPage>0</startPage>
+			<pageTimes>44</pageTimes>
+			<prefix>https://item.taobao.com/item.htm?id=</prefix>
+		</TaoBao>
+		<!-- 天猫 （翻页特殊）[PageNum]=page*60-->
+		<Tmall>
+			<charset>gbk</charset>
+			<searchURL>https://list.tmall.com/search_product.htm?q=[keyword]&amp;sort=d</searchURL>
+			<totalPage targetgroup="1">(?&lt;=b class="ui-page-s-len"&gt;\d/)(\d*)(?=&lt;/b&gt;)</totalPage>
+			<nextPageURL>https://list.tmall.com/search_product.htm?s=[PageNum]&amp;q=[keyword]&amp;sort=d&amp;style=g&amp;from=.list.pc_1_searchbutton&amp;spm=a220m.1000858.a2227oh.d100&amp;tmhkmain=0&amp;type=pc#J_Filter</nextPageURL>
+			<productURL>(?&lt;=&lt;p class="productTitle"&gt;[^&gt;]{1,20}href=")([^&amp;]*)(?=&amp;amp;)</productURL>
+			<notFound>null</notFound>
+			<startPage>0</startPage>
+			<pageTimes>60</pageTimes>
+			<prefix>https:</prefix>
+		</Tmall>
+		<!-- 一号店 -->
+		<YiHaoDian>
+			<charset>utf-8</charset>
+			<searchURL>http://search.yhd.com/c0-0/k[keyword]</searchURL>
+			<totalPage targetgroup="1">(?&lt;=&lt;input id="pageCountPage"[^\d]{1,40})(\d*)(?="/&gt;)</totalPage>
+			<nextPageURL>http://search.yhd.com/c0-0-0/b/a-s1-v4-p[PageNum]-price-d0-f0d-m1-rt0-pid-mid0-k[keyword]</nextPageURL>
+			<productURL>(?&lt;=&lt;p class="proName clearfix"&gt;[^&gt;]{1,50}href=")([^"]*)(?=" target=")</productURL>
+			<notFound>null</notFound>
+			<startPage>1</startPage>
+			<pageTimes>1</pageTimes>
+			<prefix>null</prefix>
+		</YiHaoDian>
+		<!-- 顺丰优选 -->
+		<ShunFengYouXuan>
+			<charset>utf-8</charset>
+			<searchURL>http://www.sfbest.com/productlist/search?keyword=[keyword]</searchURL>
+			<totalPage targetgroup="1">(?&lt;=&lt;span class="n">\d{1,5}&lt;/span&gt;/)(\d*)(?=&lt;/span&gt;)</totalPage>
+			<!--[PageNum]从[0]开始到[总页数-1]  -->
+			<nextPageURL>http://www.sfbest.com/productlist/search/?keyword=[keyword]&amp;o=saleNum%3Adesc&amp;pageNo=[PageNum]#prolist
+			</nextPageURL>
+			<productURL>(?&lt;=class="trackref presaleSign[^&gt;]{1,50}href=")([^"]*)(?=")</productURL>
+			<notFound>null</notFound>
+			<startPage>0</startPage>
+			<pageTimes>1</pageTimes>
+			<prefix>null</prefix>
+		</ShunFengYouXuan>
+		<!-- 邮乐购 -->
+		<YouLeGou>
+			<charset>utf-8</charset>
+			<searchURL>http://search.ule.com/search.do?keywords=[keyword]</searchURL>
+			<totalPage targetgroup="1">(?&lt;=&lt;span&gt;共)(\d*)(?=页&lt;/span&gt;)</totalPage>
+			<nextPageURL>http://search.ule.com/--[keyword]--------0-[PageNum].html</nextPageURL>
+			<productURL>(?&lt;=&lt;p class="name"&gt;[^&gt;]{1,100}href=")([^"]*)(?=")</productURL>
+			<notFound>(?=fail_content)([^"]*)</notFound>
+			<startPage>1</startPage>
+			<pageTimes>1</pageTimes>
+			<prefix>null</prefix>
+		</YouLeGou>
+		<!-- 沱沱工社 -->
+		<TuoTuoGongShe>
+			<charset>utf-8</charset>
+			<searchURL>http://www.tootoo.cn/list-s1-0-0-0-[keyword]-1,2,3,0-zh_cn.html</searchURL>
+			<totalPage targetgroup="1">(?&lt;=class="total">共)(\d*)(?=页)</totalPage>
+			<nextPageURL>http://www.tootoo.cn/list-s1-0-0-0-[keyword]-0-0-[PageNum]-0-0-0-1,2,3,0-zh_cn.html</nextPageURL>
+			<productURL>(?&lt;=class="pro_title"&gt;[^&gt;]{1,50}href=")([^"]*)(?=")</productURL>
+			<notFound>null</notFound>
+			<startPage>1</startPage>
+			<pageTimes>1</pageTimes>
+			<prefix>null</prefix>
+		</TuoTuoGongShe>
+		<!-- 世纪购 -->
+		<ShiJiGou>
+			<charset>utf-8</charset>
+			<searchURL>http://www.sjgo365.com/Products/Search?keyWord=[keyword]</searchURL>
+			<totalPage targetgroup="1">(?&lt;=&lt;font color="#EE2902"&gt;\d{1,2}/)(\d*)(?=&lt;/font&gt;)</totalPage>
+			<nextPageURL>http://www.sjgo365.com/Products/Search?keyWord=[keyword]&amp;filters=&amp;orderField=&amp;direction=desc&amp;pageIndex=[PageNum]</nextPageURL>
+			<!-- productURL只能获取到后面部分，还需要在前面加上网站地址【http://www.sjgo365.com】 -->
+			<productURL>(?&lt;=href=")([^"]*)(?=" id="name-t1)</productURL>
+			<notFound>null</notFound>
+			<startPage>1</startPage>
+			<pageTimes>1</pageTimes>
+			<prefix>http://www.sjgo365.com</prefix>
+		</ShiJiGou>
+		<!-- 太极养身馆 -->
+		<TaiJiYSG>
+			<charset>utf-8</charset>
+			<searchURL>http://www.0618.com/productlist.ac?category=1&amp;keyword=[keyword]</searchURL>
+			<totalPage targetgroup="1">(?&lt;=div class="text"&gt;\d{1,10}/)(\d*)(?=&lt;/div)</totalPage>
+			<nextPageURL>http://www.0618.com/productlist.ac?category=1&amp;q=&amp;keyword=[keyword]&amp;order=&amp;page=[PageNum]</nextPageURL>
+			<!-- productURL只能获取到后面部分，还需要在前面加上网站地址【http://www.0618.com】 -->
+			<productURL>(?&lt;=&lt;div class="title"&gt;&lt;a href=")([^"]*)(?=")</productURL>
+			<notFound>null</notFound>
+			<startPage>1</startPage>
+			<pageTimes>1</pageTimes>
+			<prefix>http://www.0618.com</prefix>
+		</TaiJiYSG>
+		<!-- 超级美味 -->
+		<ChaoJiMeiWei>
+			<charset>utf-8</charset>
+			<searchURL>http://www.cmeiwei.com/search/?wd=[keyword]</searchURL>
+			<totalPage targetgroup="1">(?&lt;=&amp;page=)(\d*)(?='&gt;下一页)</totalPage>
+			<nextPageURL>http://www.cmeiwei.com/search/?wd=[keyword]&amp;page=[PageNum]</nextPageURL>
+			<!-- productURL只能获取到后面部分，还需要在前面加上网站地址【http://www.cmeiwei.com】 -->
+			<productURL>(?&lt;=&lt;a href=")([^"]*)(?=" class="photo_listprd")</productURL>
+			<notFound>(?=抱赚没有找到商品)([^&lt;]*)</notFound>
+			<startPage>1</startPage>
+			<pageTimes>1</pageTimes>
+			<prefix>http://www.cmeiwei.com</prefix>
+		</ChaoJiMeiWei>
+		<!-- 菜管家 -->
+		<CaiGuanJia>
+			<charset>utf-8</charset>
+			<searchURL>http://www.962360.com/Home/Search/index/str/[keyword].html</searchURL>
+			<totalPage targetgroup="1">(?&lt;=get_page_info\()([^&gt;]*)(?=\)[^&gt;]{1,10}last)</totalPage>
+			<nextPageURL>http://www.962360.com/Home/Search/index/str/[keyword]/sortby/time/pageIndex/[PageNum].html</nextPageURL>
+			<!-- productURL只能获取到后面部分，还需要在前面加上网站地址【http://www.962360.com】 -->
+			<productURL>(?&lt;=gds_info[^h]{1,100}href=")([^&gt;]*)(?="[^&gt;]{1,50}target)</productURL>
+			<notFound>null</notFound>
+			<startPage>1</startPage>
+			<pageTimes>1</pageTimes>
+			<prefix>http://www.962360.com</prefix>
+		</CaiGuanJia>
+		<!-- 商小妹购 -->
+		<ShangXiaoMeiGou>
+			<charset>utf-8</charset>
+			<searchURL>http://www.sxmgo.com/clist.php?keywords=[keyword]</searchURL>
+			<totalPage targetgroup="1">(?&lt;=pagenum[^/]{1,20}&lt;/b&gt;/)([^&lt;]*)(?=&lt;/span&gt;)</totalPage>
+			<nextPageURL>http://www.sxmgo.com/clist.php?keywords=[keyword]&amp;page=[PageNum]</nextPageURL>
+			<!-- productURL只能获取到后面部分，还需要在前面加上网站地址【http://www.sxmgo.com/】 -->
+			<productURL>(?&lt;=pic[^&gt;]{1,10}href=")([^&gt;]*)(?=" title)</productURL>
+			<notFound>null</notFound>
+			<startPage>1</startPage>
+			<pageTimes>1</pageTimes>
+			<prefix>http://www.sxmgo.com/</prefix>
+		</ShangXiaoMeiGou>
+		<!-- 生鲜宅配 -->
+		<ShengXianZhaiPei>
+			<charset>utf-8</charset>
+			<searchURL>http://www.cnsxzp.com/search.php?keywords=[keyword]</searchURL>
+			<totalPage targetgroup="1">(?&lt;=id="max_page"&gt;)(\d*)(?=&lt;/span&gt;)</totalPage>
+			<nextPageURL>http://www.cnsxzp.com/search.php?keywords=[keyword]&amp;page=[PageNum]</nextPageURL>
+			<!-- productURL只能获取到后面部分，还需要在前面加上网站地址【http://www.cnsxzp.com/】 -->
+			<productURL>(?&lt;=href=")([^&gt;]*)(?=" target="_blank" title)</productURL>
+			<notFound>null</notFound>
+			<startPage>1</startPage>
+			<pageTimes>1</pageTimes>
+			<prefix>http://www.cnsxzp.com/</prefix>
+		</ShengXianZhaiPei>
+		<!-- 优码头 -->
+		<YouMaTou>
+			<charset>utf-8</charset>
+			<searchURL>http://www.umatou.com/search.php?keywords=[keyword]</searchURL>
+			<totalPage targetgroup="1">(?&lt;=page=\d">)(\d)(?=&lt;/a&gt;[^&gt;]{1,200}next)</totalPage>
+			<nextPageURL>http://www.umatou.com/search.php?keywords=[keyword]&amp;page=[PageNum]</nextPageURL>
+			<!-- productURL只能获取到后面部分，还需要在前面加上网站地址【http://www.umatou.com/】 -->
+			<productURL>(?&lt;=target="_blank" href=")([^&lt;]*)(?=" title="&lt;text&gt;&lt;font&gt;)</productURL>
+			<notFound>null</notFound>
+			<startPage>1</startPage>
+			<pageTimes>1</pageTimes>
+			<prefix>http://www.umatou.com/</prefix>
+		</YouMaTou>
+		<!-- 1688 -->
+		<ALiBaBa>
+			<charset>gbk</charset>
+			<searchURL>https://s.1688.com/selloffer/offer_search.htm?keywords=[keyword]</searchURL>
+			<totalPage targetgroup="1">(?&lt;=data-total-page=")([^"]*)(?=")</totalPage>
+			<nextPageURL>https://s.1688.com/selloffer/offer_search.htm?keywords=[keyword]&amp;beginPage=[PageNum]</nextPageURL>
+			<!-- productURL只能获取到后面部分，还需要在前面加上网站地址【http://detail.1688.com/offer/】 -->
+			<productURL>(?&lt;=offerId=")([^"]*)(?=")</productURL>
+			<notFound>null</notFound>
+			<startPage>1</startPage>
+			<pageTimes>1</pageTimes>
+			<!-- 1688特殊要加前缀"http://detail.1688.com/offer/"+url+".html" -->
+			<prefix>http://detail.1688.com/offer/</prefix>
+		</ALiBaBa>	
+		<!-- 我买网 -->
+		<WoMai>
+			<charset>gbk</charset>
+			<searchURL>http://gz.womai.com/ProductList.do?Keywords=[keyword]</searchURL>
+			<totalPage targetgroup="1">(?&lt;=共&lt;span&gt;)([^&lt;]*)(?=&lt;/span&gt;页)</totalPage>
+			<nextPageURL>http://sh.womai.com/ProductList.do?Keywords=[keyword]&amp;page=[PageNum]</nextPageURL>
+			<productURL>(?&lt;=pImg"&gt;[^&lt;]{1,50}&lt;a href=")([^&gt;]*)(?=" target)</productURL>
+			<notFound>(?=总共有0件相关商品)([^&lt;]*)</notFound>
+			<startPage>1</startPage>
+			<pageTimes>1</pageTimes>
+			<!-- 如果获取的产品url原本就为完整的，则此项为null -->
+			<prefix>http://gz.womai.com</prefix>
+		</WoMai>
+		<!-- 天天果园 -->
+		<TTGuoYuan>
+			<charset>utf-8</charset>
+			<searchURL>http://www.fruitday.com/prolist/search/[keyword]</searchURL>
+			<totalPage targetgroup="1">null</totalPage>
+			<nextPageURL>http://www.fruitday.com/prolist/search/[keyword]/[PageNum]</nextPageURL>
+			<productURL>(?&lt;=s-img"&gt;[^&lt;]{1,100}&lt;a href=")([^&gt;]*)(?=" target)</productURL>
+			<notFound>null</notFound>
+			<startPage>1</startPage>
+			<pageTimes>1</pageTimes>
+			<!-- 如果获取的产品url原本就为完整的，则此项为null -->
+			<prefix>http://www.fruitday.com</prefix>
+		</TTGuoYuan>
+		<!-- 易果生鲜 -->
+		<YGShengXian>
+			<charset>utf-8</charset>
+			<searchURL>http://search.yiguo.com/?keyword=[keyword]</searchURL>
+			<totalPage targetgroup="1">null</totalPage>
+			<nextPageURL>http://search.yiguo.com/?keyword=[keyword]&amp;page=[PageNum]</nextPageURL>
+			<productURL>(?&lt;=&lt;a href=")([^&gt;]*)(?=" target="_blank"&gt;[^&lt;]{1,100}&lt;img)</productURL>
+			<notFound>null</notFound>
+			<startPage>1</startPage>
+			<pageTimes>1</pageTimes>
+			<!-- 如果获取的产品url原本就为完整的，则此项为null -->
+			<prefix>null</prefix>
+		</YGShengXian>
+	</website>
+	<keywords>
+		预售 巴南巴山银芽;预售 乾丰牌金佛玉翠绿茶;预售 巴南早春翠绿;预售 永川秀芽;预售 茗岳雀舌茶叶;预售 梁平甜茶;预售 巴南秀芽;预售 石都松茗;预售 巴南金银花茶;预售 石都茗芽;预售 龙缸云雾茶叶;预售 大足石都春尖;预售 大足石都毛峰;预售 阳菊菊花;预售 南川九台银毫;预售 南川大树茶;预售 南川大观炒青;预售 天尺茗茶;预售 南川大观翠芽;预售 天岗玉叶茶叶;预售 箐枫菊;预售 万州银针;预售 垫江毛尖;预售 垫江毛峰;预售 垫江珍眉;预售 南川翠绿茶;预售 垫江碧螺春;预售 安溪铁观音;预售 开县龙珠茶;预售 垫江雀舌翠茗;预售 重庆毛峰;预售 南川金佛山毛峰;预售 重庆茶;预售 重庆茶叶;预售 重庆普洱;预售 南川金佛玉翠;预售 南川金佛玉翠茶;预售 重庆秀芽;预售 城口鸡鸣毛峰;预售 城口鸡鸣绿茶;预售 涪陵白茶;预售 巴南巴山毛尖;预售 南川龙峰雪芽;预售 翠屏牌茶叶;预售 城口鸡鸣贡茶;预售 巴南巴山毛峰;预售 重庆银针;预售 秀山茶叶;预售 重庆绿茶;预售 重庆葛根粉;预售 钟祥葛粉;预售 重庆果汁;预售 秀山金银花;预售 妙泉峰金银花;预售 重庆金银花;预售 江小白;预售 江津白酒;预售 垫江咂酒;预售 彭水五步蛇酒;预售 重庆梅子酒;预售 彭水苦荞;预售 重庆梅花酒;预售 重庆奶精;预售 重庆藕粉;预售 重庆啤酒;预售 重庆乐堡;预售 重庆松花粉;预售 重庆燕麦;预售 重庆饮料;预售 重庆腐竹;预售 重庆干果;预售 城口板栗;预售 重庆干货;预售 重庆枸杞;预售 重庆瓜子;预售 重庆核桃;预售 城口核桃;预售 荣昌盘龙花生;预售 荣昌黑花生;预售 重庆花生;预售 江津赵氏煮花生;预售 江津赵氏花生;预售 恋乡盘龙花生;预售 恋乡黑花生;预售 带壳花生;预售 重庆黄花;预售 涪陵龙眼干;预售 重庆食用菌;预售 重庆野生菌;预售 重庆枣;预售 武隆猪腰枣;预售 重庆芝麻;预售 竹荪;预售 重庆竹荪;预售 竹荪;预售 竹笋干;预售 重庆黑木耳;预售 重庆银耳;预售 重庆火锅底料;预售 重庆火锅料;预售 重庆火锅油;预售 重庆菜油;预售 大足纯正菜籽油;预售 重庆菜籽油;预售 酉阳茶油;预售 重庆茶油;预售 钦穗龙茶油米;预售 巴南樵坪贡米;预售 石滩大米;预售 铜梁龙龙贡米;预售 铜梁龙龙香米;预售 合川凤山米;预售 彭水龟池大米;预售 忠县明珠糯米;预售 万州罗田大米;预售 南川米;预售 南川贡米;预售 丰都栗子大米;预售 官坝大米;预售 酉阳贡米;预售 重庆大米;预售 钦穗桂花香米;预售 重庆淀粉;预售 重庆豆粉;预售 重庆方便面;预售 重庆粉皮;预售 重庆粉丝;预售 陶大薯葛根粉条;预售 彭水高粱;预售 重庆高粱;预售 重庆挂面;预售 重庆红豆;预售 重庆红薯粉;预售 重庆红小豆;预售 彭水小米花生;预售 彭水黄豆;预售 重庆黄豆粉;预售 重庆黄豆面;预售 重庆蕨根粉;预售 重庆苦荞;预售 粮油;预售 重庆麦子面;预售 重庆米粉;预售 重庆米线;预售 重庆面;预售 重庆嫩肉粉;预售 重庆牛油;预售 重庆糯米;预售 忠县糯米;预售 重庆全麦粉;预售 重庆粟粉;预售 西厢阁汤圆粉;预售 重庆苕皮;预售 云阳桐油;预售 重庆香米;预售 重庆小米豆;预售 重庆小面;预售 重庆新米;预售 重庆阴米;预售 重庆荫米;预售 彭水油茶;预售 重庆油茶;预售 重庆油醪糟;预售 忠县玉米;预售 重庆玉米粉;预售 彭水紫苏油;预售 重庆荞麦;预售 重庆绿豆;预售 重庆豌豆;预售 重庆芸豆;预售 荣昌夏布;预售 梁平竹帘;预售 梁平竹笋;预售 合川峡砚;预售 忠县苎麻;预售 开县水竹凉席;预售 江津石蟆橄榄;预售 重庆扒鸡;预售 重庆板筋;预售 休闲零食-饼干;预售 重庆饼干;预售 重庆蚕豆;预售 重庆臭干子;预售 重庆地牯牛;预售 重庆地瓜干;预售 重庆点心;预售 重庆豆腐干;预售 倒流水豆腐干;预售 北碚手工素鸡豆干;预售 重庆豆干;预售 北碚方豆干;预售 北碚条豆干;预售 北碚烧烤味手撕干;预售 北碚素牛肉味手撕干;预售 北碚野山椒手撕干;预售 北碚鸡汁豆干;预售 休闲零食-豆干;预售 彭水晶丝苕粉;预售 重庆凤爪;预售 有友泡椒凤爪;预售 泡椒凤爪;预售 重庆歌乐山;预售 重庆怪味胡豆;预售 重庆罐头;预售 重庆红薯干;预售 重庆胡豆;预售 重庆花生酥;预售 重庆鸡蛋干;预售 重庆鸡丁;预售 重庆鸡尖;预售 重庆鸡爪;预售 休闲零食-坚果;预售 重庆烤鸭;预售 金凤烤羊;预售 重庆颗颗香;预售 重庆口水豆;预售 重庆口水鸡;预售 重庆辣条;预售 重庆辣子鸡;预售 重庆兰花豆;预售 重庆零食;预售 重庆卤味;预售 重庆麻饼;预售 重庆麻花;预售 重庆麻辣鸡块;预售 重庆米花糖;预售 江津米花糖;预售 休闲零食-蜜饯;预售 休闲零食-奶油;预售 重庆南瓜籽;预售 重庆牛皮糖;预售 牛浪汉牛肉干;预售 两翼牛肉干;预售 重庆牛肉干;预售 重庆牛肉粒;预售 重庆牛轧糖;预售 重庆藕丁;预售 重庆藕片;预售 重庆爬爬虾;预售 重庆皮皮虾;预售 休闲零食-肉干;预售 重庆肉片;预售 重庆烧烤鱿鱼;预售 重庆酥;预售 重庆酥脆;预售 重庆酥肉;预售 北碚素肉脯;预售 重庆酸辣粉;预售 休闲零食-糖果;预售 合川桃片;预售 重庆桃片;预售 重庆跳跳鱼;预售 重庆铁板鱿鱼;预售 重庆兔丁;预售 重庆香干;预售 重庆香辣蹄筋;预售 重庆香酥鸭;预售 重庆小龙虾;预售 重庆鸭脖;预售 重庆鸭舌;预售 重庆鸭头;预售 重庆鸭掌;预售 松溉盐花生;预售 重庆盐水鸭;预售 休闲零食-鱼干;预售 重庆鱼干;预售 开县冰薄月饼;预售 重庆张鸭子;预售 重庆掌中宝;预售 重庆芝麻杆;预售 重庆土特产;预售 重庆猪耳;预售 重庆猪皮;预售 城口老腊肉;预售 长寿血豆腐;预售 秀山白术;预售 重庆贝母;预售 垫江丹皮;预售 重庆当归;预售 重庆党参;预售 大宁党参;预售 巫山庙党;预售 石柱参;预售 铜梁葛粉;预售 合川葛;预售 石柱黄连;预售 重庆黄连;预售 云阳小茴;预售 开县木香;预售 重庆青蒿;预售 酉阳青蒿;预售 铜梁使君子;预售 云阳乌天麻;预售 渝峰乌天麻;预售 重庆天麻;预售 南川玄参;预售 奉节白肋烟;预售 重庆药材;预售 重庆枳壳片;预售 城口太白贝母;预售 彭水苏麻;预售 重庆杜仲;预售 重庆八角;预售 重庆菜丝;预售 涪陵爽脆菜芯;预售 重庆醋;预售 松溉健康醋;预售 重庆大头菜;预售 重庆底料;预售 重庆豆瓣;预售 永川豆豉;预售 重庆豆豉;预售 重庆豆腐乳;预售 秀山豆腐乳;预售 忠州豆腐乳;预售 重庆炖料;预售 重庆格格;预售 重庆果酱;预售 重庆海带丝;预售 重庆海椒;预售 重庆红豆腐;预售 重庆红油;预售 帅青花椒;预售 董家花椒;预售 重庆花椒;预售 江津花椒;预售 黑山谷花椒;预售 重庆茴香;预售 重庆鸡精;预售 重庆酱菜;预售 重庆酱油;预售 黄花园有机酱油;预售 重庆菌汤;预售 涪陵开胃菜;预售 重庆腊货;预售 重庆腊肉;预售 重庆腊味;预售 重庆辣椒酱;预售 重庆辣子;预售 重庆料理;预售 重庆卤料;预售 石柱风味萝卜干;预售 重庆萝卜干;预售 靛萝卜干;预售 重庆泡菜;预售 重庆泡椒;预售 永川皮蛋;预售 重庆秦椒;预售 重庆肉酱;预售 万州山胡椒;预售 重庆山椒;预售 涪陵黄花什锦;预售 罗盘山生姜;预售 重庆酸菜;预售 重庆汤锅;预售 重庆汤料;预售 重庆糖;预售 重庆藤椒;预售 重庆甜面酱;预售 重庆调料;预售 重庆调味;预售 重庆味精;预售 吉香居下饭菜;预售 涪陵下饭菜;预售 重庆下饭菜;预售 重庆咸菜;预售 石柱风味老咸菜;预售 重庆香辣酱;预售 老干妈香辣酱;预售 重庆香料;预售 重庆香油;预售 重庆腌菜;预售 合川加碘食用盐;预售 松溉盐白菜;预售 乡味儿老盐菜青菜头;预售 重庆盐菜;预售 榨菜头;预售 重庆榨菜;预售 丰都榨菜;预售 涪陵榨菜;预售 重庆蘸料;预售 重庆蒸肉粉;预售 重庆专用料;预售 重庆佐料;预售 苏北农家鸡蛋;预售 重庆鸡蛋;预售 秀山土鸡蛋;预售 延庆新鲜鸡蛋;预售 农建生态鸡蛋;预售 南川鸡蛋;预售 重庆蛋;预售 重庆奶;预售 重庆百叶;预售 重庆脆骨;预售 荣昌白鹅;预售 重庆鹅;预售 重庆肥肠;预售 重庆后腿;预售 重庆黄喉;预售 彭水苗家土鸡;预售 增福土鸡;预售 重庆鸡;预售 大发铁脚麻鸡;预售 大宁河鸡;预售 秀山土鸡;预售 清远鸡;预售 鸡块;预售 鸡爪;预售 鸡珺;预售 恒蜂源乌鸡;预售 城口山地鸡;预售 南川鸡;预售 重庆菌花;预售 重庆毛肚;预售 隆县仙女山牛肉;预售 科尔沁牛肉;预售 嫩牛肉;预售 重庆牛仔骨;预售 重庆牛尾;预售 重庆牛排;预售 恒都牛肉;预售 丰都肉牛;预售 重庆牛筋;预售 彭水山地黄牛;预售 重庆肥牛;预售 重庆牛肉;预售 涪陵水牛;预售 重庆牛腩;预售 重庆牛腱子;预售 重庆牛蝎子;预售 重庆排骨;预售 重庆琵琶腿;预售 重庆千层肚;预售 重庆汤骨;预售 石柱长毛兔;预售 重庆血旺;预售 梁平肉鸭;预售 重庆鸭;预售 重庆鸭子;预售 鸭肠;预售 麻旺鸭;预售 重庆板鸭;预售 鲜鸭肠;预售 梁平山羊;预售 云阳白山羊;预售 渝东黑山羊;预售 合川白山羊;预售 彭水黑山羊;预售 大足黑山羊;预售 武隆板角山羊;预售 酉州乌羊;预售 重庆羊;预售 重庆羊肉;预售 重庆鱼皮;预售 涪陵黑猪;预售 荣昌猪;预售 荣牧生态荣昌猪肉;预售 重庆猪肉;预售 蓝希络分割肉;预售 合川黑猪;预售 团结生猪鲜肉;预售 潼南罗盘山猪;预售 中韵无公害优质洋三元猪肉;预售 木犴猪业姜家黑猪;预售 鑫宜居香猪;预售 水江黑猪;预售 胶州白菜;预售 彭水雷公盖白菜;预售 江津瓢儿白;预售 重庆白菜;预售 武隆高山白菜;预售 丰都轿子山白菜;预售 重庆波菜;预售 江津菠菜;预售 重庆菜头;预售 朴真菜心;预售 重庆朝天椒;预售 重庆莼菜;预售 莼菜;预售 西湖莼菜;预售 海涟莼菜;预售 施州莼菜;预售 石柱莼菜;预售 武隆葱;预售 武隆刀豆;预售 大足冬菜;预售 重庆冬瓜;预售 武隆冬瓜;预售 北碚冬瓜;预售 重庆豆腐;预售 重庆豆花;预售 蚕豆;预售 重庆豆皮;预售 绿油坡绿豆芽;预售 绿油坡黄豆芽;预售 重庆鹅米豆;预售 璧山儿菜;预售 临江儿菜;预售 重庆儿菜;预售 璧北木耳菜;预售 武隆木耳菜;预售 重庆木耳菜;预售 赐康番茄;预售 武隆番茄;预售 重庆番茄;预售 北碚番茄;预售 重庆甘蓝;预售 武隆高山甘蓝;预售 重庆贡菜;预售 重庆汉菜;预售 重庆红薯;预售 武隆红苕尖;预售 武隆葫芦瓜;预售 江津白花菜;预售 重庆花菜;预售 重庆花豆;预售 忠县黄瓜;预售 重庆黄瓜;预售 武隆黄瓜;预售 秀山黄花;预售 大路黄花;预售 岚峰黄花;预售 跳磴火葱;预售 重庆尖椒;预售 石柱红辣椒;预售 丘北小米辣;预售 彭水生姜;预售 重庆姜;预售 重庆豇豆;预售 忠县豇豆;预售 垫江藠头;预售 重庆芥菜;预售 金针菇;预售 金针菜;预售 重庆韭菜;预售 重庆卷心菜;预售 重庆蕨菜;预售 正宽脆黄金针菇;预售 渝都平菇;预售 潼南金针菇;预售 彭水大脚菌;预售 重庆空心菜;预售 重庆苦瓜;预售 武隆苦瓜;预售 北培苦瓜;预售 彭水辣椒;预售 綦江辣椒;预售 重庆辣椒;预售 武隆高山辣椒;预售 石柱辣椒;预售 重庆莲白;预售 彭水雷公盖萝卜;预售 重庆萝卜;预售 青草坝萝卜;预售 潼南萝卜;预售 赶水草蔸萝卜;预售 綦江赶水草蔸萝卜;预售 武隆高山萝卜;预售 丰都轿子山萝卜;预售 石曹上萝卜;预售 武隆高山风萝卜;预售 涪陵红心萝卜;预售 彭水马铃薯;预售 武隆高山马铃薯;预售 彭水魔芋;预售 巫山魔芋;预售 重庆魔芋;预售 重庆南瓜;预售 武隆南瓜;预售 永川莲藕;预售 重庆瓢儿白;预售 重庆千张;预售 重庆茄子;预售 重庆芹菜;预售 江津芹菜;预售 重庆青菜;预售 涪陵青菜头;预售 重庆青椒;预售 重庆山药;预售 重庆山药;预售 重庆肾豆;预售 江津生菜;预售 重庆生菜;预售 重庆生姜;预售 重庆蔬菜;预售 合川丝瓜;预售 重庆丝瓜;预售 武隆四季豆;预售 重庆四季豆;预售 重庆素鸡;预售 重庆蒜薹;预售 重庆笋;预售 大足雷笋;预售 南川方竹笋;预售 黑山谷方竹笋;预售 重庆藤菜;预售 重庆甜菜;预售 重庆茼蒿;预售 武隆土豆;预售 重庆土豆;预售 重庆娃娃菜;预售 上海新鲜娃娃菜;预售 重庆莴笋;预售 重庆西红柿;预售 武隆西葫芦;预售 重庆西兰花;预售 重庆西芹;预售 重庆苋菜;预售 重庆香菜;预售 重庆香椿尖;预售 重庆香菇;预售 重庆香青菜;预售 重庆小白菜;预售 重庆小瓜;预售 重庆小米辣;预售 闽万杏鲍菇;预售 重庆洋葱;预售 城口洋芋;预售 巫溪洋芋;预售 重庆野蒜;预售 重庆油麦菜;预售 重庆玉米;预售 武隆糯玉米;预售 石壕糯玉米;预售 黑山谷糯玉米;预售 折耳根;预售 重庆竹笋;预售 重庆紫薯;预售 重庆甲鱼;预售 永川水花;预售 重庆龙虾;预售 虾;预售 重庆泥鳅;预售 泥鳅;预售 重庆螃蟹;预售 帝王蟹;预售 雪蟹;预售 万县胭脂鱼;预售 璧山来凤鱼;预售 巫溪洋鱼;预售 重庆鱼;预售 三文鱼;预售 重庆长吻鮠;预售 鱿鱼须;预售 鲍鱼;预售 鲜虾条;预售 重庆中华鲟;预售 重庆草莓;预售 九龙坡老邬草莓;预售 黑山谷草莓;预售 南彭草莓;预售 江津生菜;预售 合川东山坪血橙;预售 长寿夏橙;预售 云阳红橙;预售 渝北梨橙;预售 开县春橙;预售 万州玫瑰香橙;预售 奉节脐橙;预售 赣南脐橙;预售 保合梨橙;预售 重庆橙;预售 重庆橙子;预售 开县锦橙;预售 丰都锦橙;预售 脐橙;预售 云阳红橙;预售 重庆柑;预售 重庆橘;预售 重庆柑橘;预售 江津广柑;预售 德庆皇帝柑;预售 涪陵柑橘;预售 重庆桔;预售 重庆橘;预售 重庆柑;预售 万县红桔;预售 重庆火龙果;预售 黑山锦丰梨;预售 庆隆梨;预售 大足梨;预售 南川圆黄梨;预售 重庆梨;预售 黄瓜山梨;预售 重庆特色梨;预售 大足李子;预售 渝北歪嘴李;预售 巫山脆李;预售 巫溪脆李;预售 涪陵龙眼;预售 沂蒙山蜂蜜;预售 涪陵龙眼;预售 云阳龙眼;预售 重庆龙眼;预售 丰都龙眼;预售 重庆芒果;预售 黔江红心猕猴桃;预售 黔江金溪红心猕猴桃;预售 秀山猕猴桃;预售 万州猕猴桃;预售 万州红阳猕猴桃;预售 优佳源红阳猕猴桃;预售 黑山谷猕猴桃;预售 重庆猕猴桃;预售 綦江木瓜;预售 重庆柠檬;预售 万州柠檬;预售 安岳柠檬;预售 潼南潼南东升枇杷;预售 重庆红富士;预售 重庆苹果;预售 黑山谷葡萄;预售 合川东山坪葡萄;预售 龙玥牌精品葡萄;预售 TSL牌葡萄;预售 渝北葡萄;预售 雾都普丰葡萄;预售 三贵葡萄;预售 綦江葡萄;预售 璧山葡萄;预售 九龙坡葡萄;预售 重庆石榴;预售 大足桃;预售 重庆桃;预售 潼南世纪桃;预售 重庆提子;预售 彭水西瓜;预售 永川西瓜;预售 五间西瓜;预售 沧沟西瓜;预售 重庆鲜果;预售 鱼洞乌皮樱桃;预售 黑山谷樱桃;预售 卫寺蜜柚柚子;预售 双桂梁平柚;预售 梁平柚;预售 重庆柚;预售 长寿沙田柚;预售 重庆柚子;预售 五布柚;预售 虎城尖柚;预售 垫江白柚;预售 琯溪蜜柚;预售 丰都红心柚;预售 重庆特色柚;预售 重庆水果;预售 淳之味蜂蜜;预售 重庆蜂胶;预售 南川金佛山中华蜜蜂;预售 彭水七跃山蜂蜜;预售 重庆蜂蜜;预售 重庆蜜;预售 城口蜂蜜;预售 淳之味蜂蜜;预售 沂蒙山蜂蜜;预售 宜尚蜂蜜;预售 白马蜂蜜;预售 重庆原胶;预售 重庆百合;预售 江津百合;预售 南川金佛山杜鹃;预售 南川金佛山珙桐;预售 北碚红豆杉;预售 巫溪红三叶;预售 重庆花;预售 南山腊梅;预售 静观腊梅;预售 梁平寿竹;预售 永川水花;预售 南川金佛山银杉;预售 南川金佛山银杏;
+	</keywords>
+	<maximum>
+		4000
+	</maximum>
+</searchConfig>
