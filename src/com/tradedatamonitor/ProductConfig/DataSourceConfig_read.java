@@ -21,7 +21,7 @@ import org.dom4j.io.XMLWriter;
  * Purpose: Defines the Class ProductConfig
  ***********************************************************************/
 
-/** ÅäÖÃÊı¾İ£¨¹Ø¼ü×Ö£¬ÍøÕ¾£¬ÕıÔò±í´ïÊ½£©
+/** é…ç½®æ•°æ®ï¼ˆå…³é”®å­—ï¼Œç½‘ç«™ï¼Œæ­£åˆ™è¡¨è¾¾å¼ï¼‰
  * 
  * @pdOid 2c5f83a3-55c0-4253-bd11-4e0d3caebf21 */
 public class DataSourceConfig_read {
@@ -32,21 +32,21 @@ public class DataSourceConfig_read {
 	}
 	
 	/**
-	 * ¼ÓÔØXMLÎÄ¼ş
+	 * åŠ è½½XMLæ–‡ä»¶
 	 *  @param fileName
 	 * @throws DocumentException 
 	 * @pdOid 226ee484-6c27-4695-8906-d699d66fc5fd */
 	public Document loadConfigFile() throws Exception {
 		// TODO: implement
-		// ´´½¨saxreader¶ÔÏó  
+		// åˆ›å»ºsaxreaderå¯¹è±¡  
         SAXReader reader = new SAXReader();  
-        // ¶ÁÈ¡Ò»¸öÎÄ¼ş£¬°ÑÕâ¸öÎÄ¼ş×ª»»³ÉDocument¶ÔÏó  
+        // è¯»å–ä¸€ä¸ªæ–‡ä»¶ï¼ŒæŠŠè¿™ä¸ªæ–‡ä»¶è½¬æ¢æˆDocumentå¯¹è±¡  
         Document document = reader.read(new File(configFileName));
         return document;
      
 	}
 	/**
-	 * °ÑÎÄµµ×ª»»×Ö·û´® 
+	 * æŠŠæ–‡æ¡£è½¬æ¢å­—ç¬¦ä¸² 
 	 * @param document
 	 * @return
 	 */
@@ -55,19 +55,19 @@ public class DataSourceConfig_read {
 		return docXmlText;
 	}
 	/**
-	 *  »ñÈ¡¸ùÔªËØ
+	 *  è·å–æ ¹å…ƒç´ 
 	 * @param fileName
 	 * @return
 	 * @throws DocumentException
 	 */
 	public Element   getRootEle() throws Exception{
 		
-		// »ñÈ¡¸ùÔªËØ  
+		// è·å–æ ¹å…ƒç´   
         Element root = loadConfigFile().getRootElement();        
         return root;
 	}
 	
-	/**½«ÔªËØ×ª»»ÎªString
+	/**å°†å…ƒç´ è½¬æ¢ä¸ºString
 	 * @param e
 	 * @return
 	 */
@@ -77,7 +77,7 @@ public class DataSourceConfig_read {
 	}
 	
 	/**
-	 * »ñÈ¡Ä³¸ö½áµãÏÂµÄ¾ßÌåÄÚÈİ
+	 * è·å–æŸä¸ªç»“ç‚¹ä¸‹çš„å…·ä½“å†…å®¹
 	 * @param node
 	 */
 	public String getNodeContent(Element node){
@@ -86,7 +86,7 @@ public class DataSourceConfig_read {
 	}
 	
 	/**
-	 * ½øÈëÍøÕ¾website½áµã
+	 * è¿›å…¥ç½‘ç«™websiteç»“ç‚¹
 	 * @param website
 	 * @return
 	 * @throws DocumentException
@@ -99,7 +99,7 @@ public class DataSourceConfig_read {
 	}
 	
 	/**
-	 * »ñÈ¡ÍøÕ¾µÄ±àÂë
+	 * è·å–ç½‘ç«™çš„ç¼–ç 
 	 * @param website
 	 * @return
 	 * @throws Exception
@@ -111,12 +111,12 @@ public class DataSourceConfig_read {
 	}
 	
 	/**
-	 * »ñÈ¡ÍøÕ¾¹¹ÔìËÑË÷µÄURL
-	 * @param website ÍøÕ¾
-	 * @return Ö´ĞĞËÑË÷Ê±µÄURL
+	 * è·å–ç½‘ç«™æ„é€ æœç´¢çš„URL
+	 * @param website ç½‘ç«™
+	 * @return æ‰§è¡Œæœç´¢æ—¶çš„URL
 	 * @throws Exception 
 	 */
-	public String getSearchURL(String website,String keyword) throws Exception   //²»Í¬Æ½Ì¨¸ù¾İ¹Ø¼ü´ÊËÑË÷µÄURL¹¹Ôì
+	public String getSearchURL(String website,String keyword) throws Exception   //ä¸åŒå¹³å°æ ¹æ®å…³é”®è¯æœç´¢çš„URLæ„é€ 
 	{
 		Element searchURL=getNextElement(intoWebsiteNode(website), "searchURL");
 		
@@ -127,19 +127,19 @@ public class DataSourceConfig_read {
 	}
 	
 	/**
-	 * »ñÈ¡Ä³ÍøÕ¾×ÜÒ³ÊıµÄÕıÔò±í´ïÊ½
+	 * è·å–æŸç½‘ç«™æ€»é¡µæ•°çš„æ­£åˆ™è¡¨è¾¾å¼
 	 * @param website
 	 * @return
 	 * @throws Exception
 	 */
-	public String getExtractTotalPageRegx(String website) throws Exception    //»ñÈ¡×ÜÒ³ÊıµÄÕıÔò±í´ïÊ½
+	public String getExtractTotalPageRegx(String website) throws Exception    //è·å–æ€»é¡µæ•°çš„æ­£åˆ™è¡¨è¾¾å¼
 	{	
 		Element totalPageEle=getNextElement(intoWebsiteNode(website), "totalPage");
 		return getNodeContent(totalPageEle);
 	}
 	
 	/**
-	 * È¡µÃÄ³½ÚµãÏÂµÄÄ³ÊôĞÔ,²¢½«Æä×ª³ÉÎÄ±¾
+	 * å–å¾—æŸèŠ‚ç‚¹ä¸‹çš„æŸå±æ€§,å¹¶å°†å…¶è½¬æˆæ–‡æœ¬
 	 * @param ele
 	 * @param attr
 	 * @return
@@ -152,12 +152,12 @@ public class DataSourceConfig_read {
 	}
 	
 	/**
-	 * »ñÈ¡Ä³ÍøÕ¾·ÖÒ³µÄ·Ö×é
+	 * è·å–æŸç½‘ç«™åˆ†é¡µçš„åˆ†ç»„
 	 * @param website
 	 * @return
 	 * @throws Exception
 	 */
-	public int totalPageGroupNo(String website) throws Exception    //»ñÈ¡groupÒ³ÂëÎ»ÖÃ
+	public int totalPageGroupNo(String website) throws Exception    //è·å–groupé¡µç ä½ç½®
 	{
 		
 		Element totalPageEle=getNextElement(intoWebsiteNode(website), "totalPage");
@@ -168,12 +168,12 @@ public class DataSourceConfig_read {
 	
 	
 	/**
-	 * »ñÈ¡ÍøÕ¾ÓÃÀ´¹¹ÔìÏÂÒ»Ò³URLµÄ×Ö·û´®
+	 * è·å–ç½‘ç«™ç”¨æ¥æ„é€ ä¸‹ä¸€é¡µURLçš„å­—ç¬¦ä¸²
 	 * @param website
 	 * @return
 	 * @throws Exception
 	 */
-	public String getExtractPageURL(String website,String keyword,String pageNum) throws Exception    //»ñÈ¡²»Í¬Ò³ÃæURLµÄÕıÔò±í´ïÊ½
+	public String getExtractPageURL(String website,String keyword,String pageNum) throws Exception    //è·å–ä¸åŒé¡µé¢URLçš„æ­£åˆ™è¡¨è¾¾å¼
 	{
 		Element nextPageURL=getNextElement(intoWebsiteNode(website), "nextPageURL");
 		
@@ -186,12 +186,12 @@ public class DataSourceConfig_read {
 	
 	
 	/**
-	 * »ñÈ¡Ä³ÍøÕ¾ËÑË÷½á¹ûÒ³ÃæÖĞ²úÆ·µÄÕıÔò±í´ïÊ½
+	 * è·å–æŸç½‘ç«™æœç´¢ç»“æœé¡µé¢ä¸­äº§å“çš„æ­£åˆ™è¡¨è¾¾å¼
 	 * @param website
 	 * @return
 	 * @throws Exception
 	 */
-	public String getExtractProductRegx(String website) throws Exception    //»ñÈ¡Ò³ÃæÖĞËùÓĞ²úÆ·URLÕıÔò±í´ïÊ½
+	public String getExtractProductRegx(String website) throws Exception    //è·å–é¡µé¢ä¸­æ‰€æœ‰äº§å“URLæ­£åˆ™è¡¨è¾¾å¼
 	{
 		
 		Element productURL=getNextElement(intoWebsiteNode(website), "productURL");
@@ -199,18 +199,18 @@ public class DataSourceConfig_read {
 	}
 	
 	/**
-	 * »ñÈ¡Ã»ÓĞËÑË÷µ½¹Ø¼ü´ÊµÄÅĞ¶ÏÌõ¼şÕıÔò±í´ïÊ½
+	 * è·å–æ²¡æœ‰æœç´¢åˆ°å…³é”®è¯çš„åˆ¤æ–­æ¡ä»¶æ­£åˆ™è¡¨è¾¾å¼
 	 * @param website
 	 * @return
 	 */
-	public String getNotFoundRegx(String website) throws Exception    //»ñÈ¡Ã»ÓĞËÑË÷µ½¹Ø¼ü´ÊµÄÅĞ¶ÏÌõ¼şÕıÔò±í´ïÊ½
+	public String getNotFoundRegx(String website) throws Exception    //è·å–æ²¡æœ‰æœç´¢åˆ°å…³é”®è¯çš„åˆ¤æ–­æ¡ä»¶æ­£åˆ™è¡¨è¾¾å¼
 	{
 		Element notFound=getNextElement(intoWebsiteNode(website),"notFound");
 		return getNodeContent(notFound);
 	}
 	
 	/**
-	 * »ñÈ¡pageµÄ¿ªÊ¼Ò³
+	 * è·å–pageçš„å¼€å§‹é¡µ
 	 * @throws Exception 
 	 */
 	public String getStartPage(String website) throws Exception
@@ -220,7 +220,7 @@ public class DataSourceConfig_read {
 	}
 	
 	/**
-	 * »ñÈ¡»»Ò³Ê±Ò³ÂëËù³ËÒÔµÄ±¶Êı
+	 * è·å–æ¢é¡µæ—¶é¡µç æ‰€ä¹˜ä»¥çš„å€æ•°
 	 * @throws Exception 
 	 */
 	public String getPageTimes(String website) throws Exception
@@ -230,7 +230,7 @@ public class DataSourceConfig_read {
 	}
 	
 	/**
-	 * »ñÈ¡¸÷Æ½Ì¨²úÆ·urlµÄÇ°×º
+	 * è·å–å„å¹³å°äº§å“urlçš„å‰ç¼€
 	 * @throws Exception 
 	 */
 	public String getPrefix(String website) throws Exception
@@ -240,48 +240,48 @@ public class DataSourceConfig_read {
 	}
 	
 	 /** 
-     * ±éÀúµ±Ç°½ÚµãÔªËØÏÂÃæµÄËùÓĞ(ÔªËØµÄ)×Ó½Úµã 
+     * éå†å½“å‰èŠ‚ç‚¹å…ƒç´ ä¸‹é¢çš„æ‰€æœ‰(å…ƒç´ çš„)å­èŠ‚ç‚¹ 
      *  
      * @param node 
      */  
     public void listNodes(Element node) {  
-        System.out.println("µ±Ç°½ÚµãµÄÃû³Æ£º£º" + node.getName());  
-        // »ñÈ¡µ±Ç°½ÚµãµÄËùÓĞÊôĞÔ½Úµã  
+        System.out.println("å½“å‰èŠ‚ç‚¹çš„åç§°ï¼šï¼š" + node.getName());  
+        // è·å–å½“å‰èŠ‚ç‚¹çš„æ‰€æœ‰å±æ€§èŠ‚ç‚¹  
         List<Attribute> list = node.attributes();  
-        // ±éÀúÊôĞÔ½Úµã  
+        // éå†å±æ€§èŠ‚ç‚¹  
         for (Attribute attr : list) {  
             System.out.println(attr.getText() + "-----" + attr.getName()  
                     + "---" + attr.getValue());  
         }  
   
         if (!(node.getTextTrim().equals(""))) {  
-            System.out.println("ÎÄ±¾ÄÚÈİ£º£º£º£º" + node.getText());  
+            System.out.println("æ–‡æœ¬å†…å®¹ï¼šï¼šï¼šï¼š" + node.getText());  
         }  
   
-        // µ±Ç°½ÚµãÏÂÃæ×Ó½Úµãµü´úÆ÷  
+        // å½“å‰èŠ‚ç‚¹ä¸‹é¢å­èŠ‚ç‚¹è¿­ä»£å™¨  
         Iterator<Element> it = node.elementIterator();  
-        // ±éÀú  
+        // éå†  
         while (it.hasNext()) {  
-            // »ñÈ¡Ä³¸ö×Ó½Úµã¶ÔÏó  
+            // è·å–æŸä¸ªå­èŠ‚ç‚¹å¯¹è±¡  
             Element e = it.next();  
-            // ¶Ô×Ó½Úµã½øĞĞ±éÀú  
+            // å¯¹å­èŠ‚ç‚¹è¿›è¡Œéå†  
             listNodes(e);  
         }  
     }
 
-	// »ñÈ¡Ä³¸öÔªËØÏÂ±êÇ© (strLabel)´ú±íµÄÄÚÈİ  
+	// è·å–æŸä¸ªå…ƒç´ ä¸‹æ ‡ç­¾ (strLabel)ä»£è¡¨çš„å†…å®¹  
 	public Element getNextElement(Element priorEle,String strLabel){
 		return priorEle.element(strLabel);  
 	}
     
 	/**
-	 * »ñÈ¡ËùÓĞµÄ¹Ø¼ü×Ö
-	 * @return ¹Ø¼ü×Ö×Ö·û´®
+	 * è·å–æ‰€æœ‰çš„å…³é”®å­—
+	 * @return å…³é”®å­—å­—ç¬¦ä¸²
 	 * @throws Exception 
 	 */
-	public String[] getAllProductsKeyword() throws Exception   //ËùÓĞĞèÒªËÑË÷µÄ¹Ø¼ü´Ê
+	public String[] getAllProductsKeyword() throws Exception   //æ‰€æœ‰éœ€è¦æœç´¢çš„å…³é”®è¯
 	{
-		//String []keys={"Æê³È","·î½ÚÆê³È"};
+		//String []keys={"è„æ©™","å¥‰èŠ‚è„æ©™"};
 		Element rootEle=getRootEle();
 		Element keywordsEle=getNextElement(rootEle, "keywords");
 		
@@ -290,8 +290,8 @@ public class DataSourceConfig_read {
 	}
 	
 	/**
-	 * »ñÈ¡get productURLÊıÁ¿µÄ×î´óÏŞÖÆ
-	 * @return ÊıÁ¿ÏŞÖÆ
+	 * è·å–get productURLæ•°é‡çš„æœ€å¤§é™åˆ¶
+	 * @return æ•°é‡é™åˆ¶
 	 * @throws Exception
 	 */
 	public String getMaximum() throws Exception     

@@ -10,7 +10,7 @@ import com.tradedatamonitor.util.HibernateSessionFactory;
 public class BaseDAO {
 
 	/**
-	 * ²åÈëÊı¾İ
+	 * æ’å…¥æ•°æ®
 	 * 
 	 * @param object
 	 */
@@ -34,7 +34,7 @@ public class BaseDAO {
 	}
 
 	/**
-	 * ¸üĞÂÊı¾İ¿â
+	 * æ›´æ–°æ•°æ®åº“
 	 * 
 	 * @param object
 	 */
@@ -55,7 +55,7 @@ public class BaseDAO {
 	}
 
 	/**
-	 * ´ÓÊı¾İ¿âÖĞÉ¾³ı
+	 * ä»æ•°æ®åº“ä¸­åˆ é™¤
 	 * 
 	 * @param object
 	 */
@@ -76,7 +76,7 @@ public class BaseDAO {
 	}
 
 	/**
-	 * ²éÕÒµ¥¸öEntity Bean
+	 * æŸ¥æ‰¾å•ä¸ªEntity Bean
 	 * 
 	 * @param clazz
 	 * @param id
@@ -97,7 +97,7 @@ public class BaseDAO {
 	}
 
 	/**
-	 * ²éÕÒ¶à¸öEntity Bean
+	 * æŸ¥æ‰¾å¤šä¸ªEntity Bean
 	 * 
 	 * @param hql
 	 * @return

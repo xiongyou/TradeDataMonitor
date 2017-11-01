@@ -18,7 +18,7 @@ public class MarketCollection
 	DataSourceConfig_read readXML=new DataSourceConfig_read("dataConfig.xml");
 
 	/**
-	 * ���캯�������ƽ̨��
+	 *  构造函数（传入电商平台名）
 	 * @param websiteName
 	 */
 	public MarketCollection(String websiteName)
@@ -34,7 +34,7 @@ public class MarketCollection
 	}
 
 	/**
-	 * ɨ�貢�洢ָ����վ��ָ���ؼ�ʵ���Ʒ������Ϣ
+	 * 扫描并存储指定网站中指定关键词的商品链接信息
 	 * @throws Exception 
 	 */
 	public void scanAllProduct() throws Exception  
@@ -49,7 +49,7 @@ public class MarketCollection
 
 	/** @pdOid e11e80bb-d5d0-450d-a996-86682c711781 */
 	/**
-	 * ɨ�貢�洢ָ����վ��ĳ���ؼ�ʵ���Ʒ������Ϣ
+	 * 扫描并存储指定网站中某个关键词的商品链接信息
 	 * @param keyword
 	 * @throws Exception 
 	 */
@@ -58,40 +58,40 @@ public class MarketCollection
 		int sum=0;
 		maximum=Integer.parseInt(readXML.getMaximum());
 		
-		String queryString=readXML.getSearchURL(this.website,keyword);  //�洢��ѯURL
+		String queryString=readXML.getSearchURL(this.website,keyword);  //存储查询URL
 		String charset=readXML.getCharset(this.website);
 
 		GetContentByURL getProductContent=new GetContentByURL(this.website);
 
-		List<String> pageList = new ArrayList<String>();   //�������ҳ���URL	
+		List<String> pageList = new ArrayList<String>();   //存放所有页面的URL	
 		
 		pageList=getProductContent.getSearchPagesURL(queryString,keyword,charset);
 
-		//���ҳ��ѭ������ȡ����ҳ�е�productURL
+		//根据页数循环，获取所有页中的productURL
 		if(pageList.size()!=0)
 		{
 			for(int page=0;page<pageList.size()&&sum<=maximum;page++)
 			{
-				List<String> onePageProductURL=new ArrayList<String>();   //���һ��ҳ�������в�Ʒ��URL
+				List<String> onePageProductURL=new ArrayList<String>();   //存放一个页面里所有产品的URL
 				
-				//getOnePageAllURL  ��ȡһ������ҳ�����в�ƷURL,�������ƷURL
+				//getOnePageAllURL  获取一个搜索页的所有产品URL,并保存产品URL
 				onePageProductURL=getProductContent.getAllProductURL(pageList.get(page),charset);
 				
 				for(String url:onePageProductURL)
 				{
-					//productURLManage.insertProductURL(this.setProductURL(url,keyword));    //插入到数据库����Ϣд����ݿ�
+					//productURLManage.insertProductURL(this.setProductURL(url,keyword));    //将信息写入数据库
 					sum++;
 					
-					productURLManage.saveProductURLtoTxt(url, this.website, keyword);   //保存到url文件����Ʒurl����Ӧ��ƽ̨����Ӧ�Ĺؼ���д���ļ�
-					System.out.println(url+"\t"+this.website+"\t"+keyword);    //����Ʒurl��ӡ����
+					productURLManage.saveProductURLtoTxt(url, this.website, keyword);   //将产品url、对应的平台、对应的关键字写入文件
+					System.out.println(url+"\t"+this.website+"\t"+keyword);    //将产品url打印出来
 				}	
-				productURLManage.saveProductURLCounttoTxt(this.website+":"+keyword+":共采集到"+sum+"商品");  //���ؼ�������ͳ��д���ı��ļ�
+				productURLManage.saveProductURLCounttoTxt(this.website+":"+keyword+":共采集到"+sum+"商品");  //将关键字销售统计写入文本文件
 				System.out.println(this.website+":"+keyword+":共采集到"+sum+"商品");
 			}
 		}
 		else
 		{
-			productURLManage.saveProductURLCounttoTxt(this.website+":"+keyword+":共采集到"+sum+"商品");  //���ؼ�������ͳ��д���ı��ļ�
+			productURLManage.saveProductURLCounttoTxt(this.website+":"+keyword+":共采集到"+sum+"商品");  //将关键字销售统计写入文本文件
 			System.out.println(this.website+":"+keyword+":共采集到"+sum+"商品");	
 		}
 	}

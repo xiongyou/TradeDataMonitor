@@ -23,7 +23,7 @@ public class DataExtractUtility
 	}
 
 	/**
-	 * ��ݹؼ��ֹ����ѯURL
+	 * 根据关键字构造查询URL
 	 * @param keyword
 	 * @return
 	 * @throws Exception
@@ -34,16 +34,16 @@ public class DataExtractUtility
 
 	}
 	
-	/**�ؼ����������ж�
-	 * @param urlString ����ҳ����ַ
-	 * @return ��Ʒ�����������ҳ��URL�б�
+	/**关键词搜索结果判定
+	 * @param urlString 搜索页面网址
+	 * @return 产品所有搜索结果页面URL列表
 	 * @throws Exception 
 	 */
 	public boolean notFoundDetermine(String searchPageContent) throws Exception
 	{
 		String regex=null;
 		
-		regex=readXML.getNotFoundRegx(this.website);  //��ȡû���������ı�ǵ�������ʽ
+		regex=readXML.getNotFoundRegx(this.website);  //获取没有搜索结果的标记的正则表达式
 		
 		Pattern pa=Pattern.compile(regex,Pattern.DOTALL);
 		Matcher ma=pa.matcher(searchPageContent);
@@ -59,7 +59,7 @@ public class DataExtractUtility
 	}
 	
 	/**
-	 * ��ȡ��������ҳ��
+	 * 获取搜索的总页数
 	 * @param searchPageContent
 	 * @return
 	 * @throws Exception
@@ -70,7 +70,7 @@ public class DataExtractUtility
 		String page ="1";
 
 
-		regex=readXML.getExtractTotalPageRegx(this.website);  //��ȡ��ҳ��������ʽ
+		regex=readXML.getExtractTotalPageRegx(this.website);  //获取分页数正则表达式
 
 		Pattern pa=Pattern.compile(regex,Pattern.DOTALL);
 		Matcher ma=pa.matcher(searchPageContent);
@@ -93,7 +93,7 @@ public class DataExtractUtility
 	}
 
 	/**
-	 * ��������ҳ��URL
+	 * 构造搜索页面URL
 	 * @param totalPageNo
 	 * @param keyword
 	 * @return
@@ -126,14 +126,14 @@ public class DataExtractUtility
 		for(int j=0;j<totalPageNo;j++)
 		{
 			String pageURL=readXML.getExtractPageURL(this.website, keyword,page_int[j].toString());
-			list.add(pageURL);     //��ҳ��URL����
+			list.add(pageURL);     //各页面URL构造
 		}
 
 		return list;
 	}
 
 	/**
-	 * ����������ƷURL
+	 * 构造搜索产品URL
 	 * @param pageContent
 	 * @return
 	 * @throws Exception
@@ -143,8 +143,8 @@ public class DataExtractUtility
 		String regex=null;
 		final List<String> list = new ArrayList<String>();
 
-		regex =readXML.getExtractProductRegx(this.website);   //��ȡ������ƷURL������ʽ
-		prefix=readXML.getPrefix(this.website);    //��ȡ��Ʒurl��ǰ׺
+		regex =readXML.getExtractProductRegx(this.website);   //获取各个产品URL正则表达式
+		prefix=readXML.getPrefix(this.website);    //获取产品url的前缀
 		
 		Pattern pa = Pattern.compile(regex, Pattern.DOTALL);
 		Matcher ma = pa.matcher(pageContent);

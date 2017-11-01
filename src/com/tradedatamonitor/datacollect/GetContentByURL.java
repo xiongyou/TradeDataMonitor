@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-/** @pdOid ���URL��ȡ��Ʒ��Ϣ*/
+/** @pdOid 根据URL获取产品信息*/
 public class GetContentByURL 
 {
 	DataExtractUtility deUtility=null; 
@@ -20,9 +20,10 @@ public class GetContentByURL
 		this.deUtility=new DataExtractUtility(websiteName);
 	}
 	
-	/**��ȡ��ҳ����by URL 
-	 * @param urlString ��ַ
-	 * @return ��ҳ����
+	/**获取网页内容by URL   
+	 * @param urlString 网址  
+	 * @return 网页内容  
+
 	 * @throws IOException
 	 */
 	public String getOneHtml(final String urlString,String charset) throws IOException
@@ -38,7 +39,7 @@ public class GetContentByURL
 			urlConnection.setDoOutput(true);
 			urlConnection.setConnectTimeout(10000);
 			urlConnection.connect();
-			final BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(),charset));// ��ȡ��ҳȫ������
+			final BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(),charset));// 读取网页全部内容
 			
 			while ((temp = in.readLine()) != null)
 			{
@@ -48,7 +49,8 @@ public class GetContentByURL
 		}
 		catch (final MalformedURLException me)
 		{
-			System.out.println("打开URL失败");
+			System.out.println("你输入的URL格式有问题！请仔细输入");
+			//System.out.println("打开URL失败");
 			me.getMessage();
 			throw me;
 		}
@@ -57,14 +59,14 @@ public class GetContentByURL
 			e.printStackTrace();
 			throw e;
 		}
-		//System.out.println(sb.toString()); //��ӡ��ҳ����
+		//System.out.println(sb.toString()); //打印网页内容
 		return sb.toString();
 	}
 
 	
-	/**��ȡ���в�Ʒ����ҳ���URL
-	 * @param urlString ����ҳ����ַ
-	 * @return ��Ʒ�����������ҳ��URL�б�
+	/**获取所有产品搜索页面的URL
+	 * @param urlString 搜索页面网址ַ
+	 * @return 产品所有搜索结果页面URL列表
 	 * @throws Exception 
 	 */
 	public List<String> getSearchPagesURL(String urlString,String keyword,String charset) throws Exception
@@ -82,17 +84,17 @@ public class GetContentByURL
 		
 		if(this.deUtility.notFoundDetermine(html))
 		{
-			int page_max=this.deUtility.extractTotalPageNo(html);  //��ȡҳ��
+			int page_max=this.deUtility.extractTotalPageNo(html);  //获取页数
 			
-			list=this.deUtility.getAllSearchResPages(page_max,keyword);   //�洢ҳ��URL	
+			list=this.deUtility.getAllSearchResPages(page_max,keyword);   //存储页面URL	
 		}
 		return list;
 	}
 
 
-	/**���ҳ���URL��ȡ���в�Ʒ��URL
-	 * @param urlString ��ҳ��ַ
-	 * @return ��ƷURL�б�
+	/**根据页面的URL获取所有产品的URL
+	 * @param urlString 分页网址ַ
+	 * @return 产品URL列表
 	 * @throws Exception 
 	 */
 	public List<String> getAllProductURL(String urlString,String charset) throws Exception  
@@ -106,9 +108,9 @@ public class GetContentByURL
 		{
 			e.getMessage();
 		}
-		System.out.println("------------------------换页了------------------------------");
+		System.out.println("------------------------换页了！------------------------------");
 
-		List<String> list=this.deUtility.extractProductURL(html);   //�洢ҳ��URL
+		List<String> list=this.deUtility.extractProductURL(html);   //存储页面URL
 		
 		return list;
 

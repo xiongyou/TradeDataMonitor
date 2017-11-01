@@ -16,14 +16,12 @@ public class Test
 	public static void main(String args[]) throws IOException
 	{
 		/*	Product apple=new Product();
-		apple.setProductName("Æ»¹û");
+		apple.setProductName("è‹¹æœ");
 		apple.setProductURL("//item.jd.com/41545651");
 		apple.setShelveDate(new Date());
-
 		Store store=new Store();
-		store.setStoreName("Ë®¹ûÖ®Íõ");
+		store.setStoreName("æ°´æœä¹‹ç‹");
 		store.setStoreURL("//mall.jd.com//4458");
-
 		BaseDAO dao=new BaseDAO();
 		dao.create(store);
 		apple.setStore(store);
@@ -32,18 +30,12 @@ public class Test
 
 
 
-		/*List<String> list = new ArrayList<String>();   //´æ·ÅËùÓĞÒ³ÃæµÄURL
-
-		list=GetContentByURL.getAllPageURL(GetContentByURL.setMainURL("Æê³È"));
-
-		List<String> list_URL = new ArrayList<String>();   //´æ·ÅÃ¿Ò»Ò³²úÆ·µÄURL
-
+		/*List<String> list = new ArrayList<String>();   //å­˜æ”¾æ‰€æœ‰é¡µé¢çš„URL
+		list=GetContentByURL.getAllPageURL(GetContentByURL.setMainURL("è„æ©™"));
+		List<String> list_URL = new ArrayList<String>();   //å­˜æ”¾æ¯ä¸€é¡µäº§å“çš„URL
 		list_URL=GetContentByURL.getAllProductURL(list.get(0));
-
-		ProductURL productURL[]=new ProductURL[list_URL.size()];  //´æ·Å²úÆ·¶ÔÏó
-
+		ProductURL productURL[]=new ProductURL[list_URL.size()];  //å­˜æ”¾äº§å“å¯¹è±¡
 		BaseDAO dao=new BaseDAO();
-
 		for(int i=0,j=0;i<list_URL.size()&&j<list_URL.size();i=i+2,j++)
 		{ 
 			productURL[j]=new ProductURL();
@@ -58,13 +50,13 @@ public class Test
 		//			GetContentByURL getContentByURL=new GetContentByURL();
 		//			DataSourceConfig dataSourceConfig=DataSourceConfig();
 		//		
-		//		   int sum=0;    //Í³¼Æ¼ìË÷µÄÅ©²úÆ·ÊıÄ¿
+		//		   int sum=0;    //ç»Ÿè®¡æ£€ç´¢çš„å†œäº§å“æ•°ç›®
 		//		   
-		//		   List<String> list = new ArrayList<String>();   //´æ·ÅËùÓĞÒ³ÃæµÄURL
+		//		   List<String> list = new ArrayList<String>();   //å­˜æ”¾æ‰€æœ‰é¡µé¢çš„URL
 		//		
 		//		   list=GetContentByURL.getAllPageURL(GetContentByURL.getSearchURL("SuNing"));
 		//		   
-		//		   List<String> list_URL = new ArrayList<String>();   //´æ·ÅÃ¿Ò»Ò³²úÆ·µÄURL
+		//		   List<String> list_URL = new ArrayList<String>();   //å­˜æ”¾æ¯ä¸€é¡µäº§å“çš„URL
 		//		   
 		//		   for(int i=0;i<list.size();i++)
 		//		   { 
@@ -76,12 +68,12 @@ public class Test
 		//			   }
 		//		   }
 		//			   
-		//		   System.out.println(GetContentByURL.setMainURL("Æê³È")+"&page="+list.get(2)+"  È«²¿Á´½ÓÄÚÈİ½áÊø!");
-		//		   System.out.println("ËùÓĞ²úÆ·ÊıÄ¿Îª£º"+sum/2);
+		//		   System.out.println(GetContentByURL.setMainURL("è„æ©™")+"&page="+list.get(2)+"  å…¨éƒ¨é“¾æ¥å†…å®¹ç»“æŸ!");
+		//		   System.out.println("æ‰€æœ‰äº§å“æ•°ç›®ä¸ºï¼š"+sum/2);
 
 		//List<String> list=new ArrayList<String>();    
 
-		//list=GetContentByURL.getAllProductURL(GetContentByURL.setMainURL("Æê³È"));
+		//list=GetContentByURL.getAllProductURL(GetContentByURL.setMainURL("è„æ©™"));
 
 		//		for(int i=0;i<list.size();i++)
 		//		{
